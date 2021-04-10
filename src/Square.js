@@ -12,6 +12,8 @@ const Square = ({onFaultClick,isVisible,isBomb,neighborBombCount,gameOver}) => {
         e.preventDefault();
         if (e.type === 'click') {
             console.log('Left click');
+            if(isRightClicked) 
+                setIsRightClicked(false);
             setIsLeftClicked(true);
             if(isBomb)
             {
@@ -30,7 +32,7 @@ const Square = ({onFaultClick,isVisible,isBomb,neighborBombCount,gameOver}) => {
             :
              (isLeftClicked && !isFaultClicked) || (gameOver && !isBomb) ? neighborBombCount 
              :
-             isBomb ? <img src={bomb}></img> : ""}
+             isBomb && !isRightClicked? <img src={bomb}></img> : ""}
         </div>
         </>
     );
