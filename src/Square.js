@@ -7,9 +7,10 @@ const Square = ({onFaultClick,isVisible,isBomb,neighborBombCount,gameOver}) => {
     useEffect(() => !gameOver ? (setIsLeftClicked(false),setIsRightClicked(false),setIsFaultClicked(false)) : false , [gameOver]);
     function handleClick(e)
     {
-        if(gameOver)
-            return;
         e.preventDefault();
+        if(gameOver || isLeftClicked)
+            return;
+       
         if (e.type === 'click') {
             console.log('Left click');
             if(isRightClicked) 
@@ -22,7 +23,7 @@ const Square = ({onFaultClick,isVisible,isBomb,neighborBombCount,gameOver}) => {
             }
           } else if (e.type === 'contextmenu') {
             console.log('Right click');
-            setIsRightClicked(true);
+            setIsRightClicked(!isRightClicked);
           }
     }
     return (<>
